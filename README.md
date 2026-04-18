@@ -36,8 +36,11 @@ The system follows a microservices-based, event-driven architecture:
 2.  **Integration & Orchestration**: WSO2 Micro Integrator handles complex service orchestration, protocol transformation, and security enforcement.
 3.  **Compute Layer**: AWS Lambda functions execute business logic in a scalable, serverless environment.
 4.  **Communication Layer**: AWS IoT Core manages the MQTT-based communication with the physical Charging Stations.
-5.  **Data Layer**: Amazon DynamoDB provides a high-performance, NoSQL store for session state and charging profiles.
-6.  **Messaging Layer**: AWS SQS buffers incoming telemetry data and handles asynchronous background tasks.
+5. **Data Layer**: Amazon DynamoDB provides a high-performance, NoSQL store for session state and charging profiles.
+6. **Messaging Layer**: AWS SQS buffers incoming telemetry data and handles asynchronous background tasks, ensuring high availability and decoupling.
+
+### Feature Highlight: Grid-Aware Charging
+The orchestration layer utilizes real-time telemetry from **AWS IoT Core** to monitor charger loads. When peak grid demand is detected, the **WSO2 Micro Integrator** coordinates with the **Grid Intelligence Lambda** to throttle charging rates across the network, optimizing energy consumption without user intervention.
 
 > [!NOTE]
 > A detailed architecture diagram [v1] can be found in the [docs/](docs/architecture-v1.png) folder.
