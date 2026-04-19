@@ -11,6 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
+// Routes
+const stationRoutes = require('./routes/stationRoutes');
+app.use('/stations', stationRoutes);
+
 // Basic Route
 app.get('/', (req, res) => {
   res.json({
