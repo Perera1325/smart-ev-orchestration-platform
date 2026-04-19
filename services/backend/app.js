@@ -24,9 +24,13 @@ app.use('/payment', paymentRoutes);
 app.get('/', (req, res) => {
   res.json({
     message: 'Smart EV Orchestration Backend is running',
-    version: '1.0.0'
+    version: process.env.API_VERSION || '1.0.0'
   });
 });
+
+// Error Handler
+const errorHandler = require('./middleware/errorMiddleware');
+app.use(errorHandler);
 
 // Start Server
 app.listen(PORT, () => {
