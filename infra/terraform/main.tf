@@ -90,6 +90,35 @@ resource "aws_security_group" "allow_web" {
   }
 }
 
+# --- IAM Role for EC2 ---
+
+resource "aws_iam_role" "ec2_role" {
+  name = "${var.project_name}-ec2-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "s3_access" {
+  role       = aws_iam_role.ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+}
+
+resource "aws_iam_instance_profile" "ec2_profile" {
+  name = "${var.project_name}-instance-profile"
+  role = aws_iam_role.ec2_role.name
+}
+
 # --- EC2 Instance ---
 
 resource "aws_instance" "web" {
@@ -99,8 +128,25 @@ resource "aws_instance" "web" {
   key_name      = var.key_name
 
   vpc_security_group_ids = [aws_security_group.allow_web.id]
+  iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
 
   tags = {
     Name = "${var.project_name}-web-server"
   }
+}
+
+# --- S3 Bucket ---
+
+resource "aws_s3_bucket" "storage" {
+  bucket = "${var.project_name}-storage-${random_string.suffix.result}"
+
+  tags = {
+    Name = "${var.project_name}-bucket"
+  }
+}
+
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+  upper   = false
 }
