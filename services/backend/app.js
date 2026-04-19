@@ -13,7 +13,10 @@ app.use(morgan('dev'));
 
 // Routes
 const stationRoutes = require('./routes/stationRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
+
 app.use('/stations', stationRoutes);
+app.use('/booking', bookingRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
