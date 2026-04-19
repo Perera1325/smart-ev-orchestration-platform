@@ -1,0 +1,18 @@
+{
+  "name": "smart-ev-backend",
+  "version": "1.0.0",
+  "description": "Core backend service for Smart EV Charging Orchestration Platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  },
+  "author": "Smart EV Team",
+  "license": "MIT"
+}
