@@ -48,8 +48,8 @@ The system has evolved into a robust **Microservices & Event-Driven Architecture
 ## 📂 Project Structure
 
 ```text
-├── docs/               # Architecture v2, System Design (Refined), API Specs, ADRs
-├── infra/              # Infrastructure as Code (Planned)
+├── docs/               # Architecture v2, System Design, API Specs, ADRs, Infra Docs
+├── infra/              # Infrastructure as Code (Terraform)
 ├── services/           # Microservices source code (Day 3+)
 ├── wso2/               # WSO2 MI/APIM configuration files
 └── .github/            # CI/CD Workflows
@@ -57,10 +57,26 @@ The system has evolved into a robust **Microservices & Event-Driven Architecture
 
 ---
 
+## 🏗 Infrastructure Setup
+
+The platform's infrastructure is managed using **Terraform (Infrastructure as Code)**. This ensures consistency and reliability across different environments.
+
+### Cloud Components
+- **Networking**: VPC, Public Subnets, Internet Gateway.
+- **Compute**: AWS EC2 (t2.micro - Free Tier).
+- **Storage**: Amazon S3 for logs and persistent data.
+- **Security**: IAM Roles for least-privilege access and Security Groups for network isolation.
+
+For detailed deployment instructions, refer to the [Infrastructure Documentation](infra/terraform/README.md).
+
+
+---
+
 ## 📈 Project Status
 
 - **Day 1**: Foundation, initial documentation, and v1 architecture. ✅
 - **Day 2**: Advanced architecture design, Microservices decomposition, and ADR documentation. ✅
+- **Day 3**: Infrastructure as Code (IaC) implementation with Terraform. ✅
 
 ---
 
@@ -68,7 +84,7 @@ The system has evolved into a robust **Microservices & Event-Driven Architecture
 
 - [ ] Implementation of the `booking-service` and `payment-service` core logic.
 - [ ] Development of the WSO2 Micro Integrator sequences for service orchestration.
-- [ ] Initial Terraform scripts for AWS messaging and database infrastructure.
+- [ ] Integration of AWS messaging (SNS/SQS) with the microservices.
 
 ---
 
