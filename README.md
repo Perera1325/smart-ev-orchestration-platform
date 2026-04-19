@@ -69,6 +69,18 @@ The platform's infrastructure is managed using **Terraform (Infrastructure as Co
 
 For detailed deployment instructions, refer to the [Infrastructure Documentation](infra/terraform/README.md).
 
+---
+
+## 🚀 Backend Implementation
+
+The platform's core logic is handled by a Node.js microservice.
+
+### API Endpoints
+- **GET `/stations`**: Real-time charging station availability.
+- **POST `/booking`**: Reservation management.
+- **POST `/payment`**: Transaction processing simulation.
+
+This service is ready for **WSO2 API Gateway** integration. For more details, see the [Backend Documentation](services/backend/README.md).
 
 ---
 
@@ -77,14 +89,15 @@ For detailed deployment instructions, refer to the [Infrastructure Documentation
 - **Day 1**: Foundation, initial documentation, and v1 architecture. ✅
 - **Day 2**: Advanced architecture design, Microservices decomposition, and ADR documentation. ✅
 - **Day 3**: Infrastructure as Code (IaC) implementation with Terraform. ✅
+- **Day 4**: Backend Services & API Implementation (Node.js/Express). ✅
 
 ---
 
 ## 🚀 Next Steps
 
-- [ ] Implementation of the `booking-service` and `payment-service` core logic.
-- [ ] Development of the WSO2 Micro Integrator sequences for service orchestration.
-- [ ] Integration of AWS messaging (SNS/SQS) with the microservices.
+- [ ] Integration of the backend services with **WSO2 API Manager**.
+- [ ] Development of the WSO2 Micro Integrator sequences for advanced orchestration.
+- [ ] Transitioning from in-memory storage to **Amazon DynamoDB/RDS**.
 
 ---
 
