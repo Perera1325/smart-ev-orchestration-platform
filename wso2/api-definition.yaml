@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: EV Charging API
+  description: API for the Smart EV Orchestration Platform, exposing endpoints for station discovery, reservations, and payment processing.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local Backend Service Node
+paths:
+  /stations:
+    get:
+      summary: Retrieve EV Charging Stations
+      description: Returns a list of all available EV charging stations.
+      operationId: getStations
+      responses:
+        '200':
+          description: A JSON array of charging stations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Station'
+  /booking:
+    post:
+      summary: Create a booking
+      description: Reserves a timeslot at a specific EV charging station.
+      operationId: createBooking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: Booking successful
+        '400':
+          description: Invalid booking parameters
+  /booking/{id}:
+    get:
+      summary: Retrieve booking details
+      description: Fetches the details of a specific reservation using the booking ID.
+      operationId: getBookingById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the booking
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Booking details retrieved successfully
+        '404':
+          description: Booking not found
+  /payment:
+    post:
+      summary: Process payment
+      description: Initiates a payment simulation for a charging session.
+      operationId: processPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Payment successful
+        '400':
+          description: Payment failed or invalid card
+components:
+  schemas:
+    Station:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        availableSlots:
+          type: integer
+    BookingRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        stationId:
+          type: string
+        timeSlot:
+          type: string
+    PaymentRequest:
+      type: object
+      properties:
+        bookingId:
+          type: string
+        amount:
+          type: number
+        cardNumber:
+          type: string
