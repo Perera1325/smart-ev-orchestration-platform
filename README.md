@@ -10,11 +10,11 @@ The **Smart EV Charging Orchestration Platform** is an enterprise-grade, cloud-n
 
 ---
 
-## 🏗 System Architecture (v2)
+## 🏗 System Architecture (v3)
 
-The system has evolved into a robust **Microservices & Event-Driven Architecture**. This design ensures high availability, independent scalability, and fault tolerance across all business domains.
+The system features an Enterprise API Gateway layer protecting robust **Microservices & Event-Driven Architecture**. This design ensures secure routing, independent scalability, and fault tolerance.
 
-![Architecture Diagram v2](docs/architecture-v2.png)
+![Architecture Diagram v3](docs/architecture-v3.png)
 
 ### Key Architectural Concepts
 - **API First**: All system capabilities are exposed via standardized RESTful APIs secured by **WSO2 API Manager**.
@@ -84,20 +84,32 @@ This service is ready for **WSO2 API Gateway** integration. For more details, se
 
 ---
 
+## 🛡️ API Management with WSO2
+
+The platform uses **WSO2 API Manager** to securely expose backend microservices to external developers and applications.
+
+### Key API Governance Features
+- **Security Implementation**: All endpoints are protected via strict **OAuth2/JWT** bearer tokens, preventing unauthorized access to sensitive `/payment` routes.
+- **Rate Limiting (Throttling)**: Precise restriction of requests per minute per user (e.g., Bronze, Silver, Gold plans) to prevent backend exhaustion and DDoS attacks.
+- **API Lifecycle**: APIs are strictly versioned and managed through states (Created, Published, Deprecated) to prevent breaking changes for existing integrations.
+- **Enterprise Benefits**: Centralized logging, monetization potential, and isolation between internal backend logic and external consumer interactions.
+
+---
+
 ## 📈 Project Status
 
 - **Day 1**: Foundation, initial documentation, and v1 architecture. ✅
 - **Day 2**: Advanced architecture design, Microservices decomposition, and ADR documentation. ✅
 - **Day 3**: Infrastructure as Code (IaC) implementation with Terraform. ✅
 - **Day 4**: Backend Services & API Implementation (Node.js/Express). ✅
+- **Day 5**: WSO2 API Management & Integration Layer Setup. ✅
 
 ---
 
 ## 🚀 Next Steps
 
-- [ ] Integration of the backend services with **WSO2 API Manager**.
-- [ ] Development of the WSO2 Micro Integrator sequences for advanced orchestration.
 - [ ] Transitioning from in-memory storage to **Amazon DynamoDB/RDS**.
+- [ ] Integration of messaging queues (**AWS SQS**) for event-driven orchestration.
 
 ---
 
